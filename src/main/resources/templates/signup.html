@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DevNews-회원가입</title>
+  <link rel="stylesheet" href="/signup.css"/>
+</head>
+<body>
+<div class="container">
+  <header class="header">
+    <a class="header__logo" th:href="@{/}">Dev<span>r</span>News</a>
+    <nav class="header__menu">
+      <ul class="header__menu__list">
+        <li class="header__menu__item"><a class="header__menu__link" th:href="@{/news/list}">Developer News</a></li>
+        <li class="header__menu__item"><a class="header__menu__link" th:href="@{/review/list}">News Review</a></li>
+        <li class="header__menu__item"><a class="header__menu__link" th:href="@{/notice/list}">Notice</a></li>
+        <li class="header__menu__item"><a class="header__menu__link" sec:authorize="isAnonymous()"
+                                          th:href="@{/user/login}">Log-In</a></li>
+        <li class="header__menu__item"><a class="header__menu__link" sec:authorize="isAuthenticated()"
+                                          th:href="@{/user/logout}">Log-Out</a></li>
+        <li class="header__menu__item"><a class="header__menu__link" sec:authorize="isAnonymous()"
+                                          th:href="@{/user/signup}">Sign-Up</a></li>
+      </ul>
+    </nav>
+  </header>
+  <!-- Container for all sliders, and pagination -->
+  <main class="sliders-container">
+    <form th:action="@{/user/signup}" th:object="${userCreateForm}" method="post" class="sign_In">
+      <div class="grad1"></div>
+      <div class="header1">
+        <div class="cont_logo"><a class="header__logo" th:href="@{/}">Dev<span>r</span>News</a> Signup</div>
+      </div>
+      <div class="login">
+        <input type="text" th:field="*{username}" class="form-control" placeholder="USERNAME" />
+        <input type="password" th:field="*{password1}" class="form-control" placeholder="PASSWORD" />
+        <input type="password" th:field="*{password2}" class="form-control" placeholder="RE-PASSWORD">
+        <br>
+        <input type="text" th:field="*{nickname}" name="nickname" class="form-control" placeholder="NICKNAME">
+        <input onclick="this.style.backgroundColor = '#69c061';" type="submit" value="go on... click me!"/>
+      </div>
+
+    </form>
+  </main>
+  <!--  영역  -->
+  <footer class="footer">
+    <nav class="footer__menu">
+      <ul class="footer__menu__list">
+        <li class="footer__menu__item"><a class="footer__menu__link" href="https://velog.io/@ohtj6644">velog</a></li>
+        <li class="footer__menu__item"><a class="footer__menu__link" href="https://github.com/ohtj6644">github</a></li>
+        <li class="footer__menu__item"><a class="footer__menu__link">instagram</a></li>
+      </ul>
+    </nav>
+  </footer>
+</div>
+
+</body>
+</html>

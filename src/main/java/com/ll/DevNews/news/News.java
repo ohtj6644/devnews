@@ -35,7 +35,7 @@ public class News {
     private List<NewsAnswer> answerList;
 
     @OneToMany(mappedBy = "article", cascade = CascadeType.REMOVE)
-    private List<Review> reviewrList;
+    private List<Review> reviewList;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id")

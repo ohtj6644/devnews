@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -24,7 +25,7 @@ public class News {
     @Size(max = 50)
     private String subject;
 
-    private LocalDate createDate;
+    private LocalDateTime createDate;
 
     @Column(columnDefinition = "text")
     private String content;
@@ -40,4 +41,15 @@ public class News {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id")
     private SiteUser author;
+
+    @ElementCollection
+    @CollectionTable(name = "news_filenames", joinColumns = @JoinColumn(name = "news_id"))
+    @Column(name = "filename")
+    private List<String> filenames;
+
+    @ElementCollection
+    @CollectionTable(name = "news_filepaths", joinColumns = @JoinColumn(name = "news_id"))
+    @Column(name = "filepath")
+    private List<String> filepaths;
+
 }

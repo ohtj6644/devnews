@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DevNews(뉴스작성)</title>
+  <link rel="stylesheet" href="/newform.css"/>
+</head>
+<body>
+<div class="container">
+  <header th:replace="layout/navbar.html"></header>
+  <!-- Container for all sliders, and pagination -->
+  <span class="titleCon">Developer News create</span>
+  <main class="sliders-container">
+    <form th:object="${newsForm}" method="post" class="form" enctype="multipart/form-data">
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+
+      <div th:replace="~{form_errors :: formErrorsFragment}"></div>
+      <div class="mb-3">
+        <label  class="form-label">제목</label>
+        <input type="text" th:field="*{subject}" class="form-control form-control-1">
+      </div>
+
+
+
+
+      <div class="product-img-box">
+        <label for="avatar1" class="picture">사진:</label>
+        <input accept="image/png, image/jpeg, image/jpg" id="avatar1" name="files" type="file" multiple>
+      </div>
+      <div class="mb-3">
+        <label  class="form-label">내용</label>
+        <textarea sec:authorize="isAnonymous()" th:field="*{content}"
+                  class="form-control" rows="10" th:if="${#authorization.expression('isAnonymous()')}"></textarea>
+        <textarea sec:authorize="isAuthenticated()" th:field="*{content}"
+                  class="form-control" rows="10"
+                  th:if="${#authorization.expression('isAuthenticated()')}"></textarea>
+      </div>
+      <div class="button">
+        <input type="submit" value="저장하기" class="btn btn-primary my-2">
+      </div>
+
+    </form>
+  </main>
+  <!--  영역  -->
+  <footer class="footer">
+    <nav class="footer__menu">
+      <ul class="footer__menu__list">
+        <li class="footer__menu__item"><a class="footer__menu__link" href="https://velog.io/@ohtj6644">velog</a></li>
+        <li class="footer__menu__item"><a class="footer__menu__link" href="https://github.com/ohtj6644">github</a></li>
+        <li class="footer__menu__item"><a class="footer__menu__link">instagram</a></li>
+      </ul>
+    </nav>
+  </footer>
+</div>
+
+</body>
+</html>

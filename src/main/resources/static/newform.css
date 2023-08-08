@@ -1,0 +1,212 @@
+
+body {
+  color: white;
+  background-color: #1B1C21;
+  overflow: hidden;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.container:before {
+  content: "";
+  position: absolute;
+  left: -150%;
+  top: 0;
+  width: 300%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  transform: rotate(45deg);
+  z-index: -1;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 30px;
+}
+
+.header__logo {
+  font-size: 1.3em;
+  font-weight: 900;
+  letter-spacing: -1px;
+}
+.header__logo span {
+  display: inline-block;
+  transform: translateY(4px) rotate(180deg);
+  pointer-events: none;
+}
+
+.header__menu {
+  margin-left: auto;
+}
+
+.header__menu__list, .footer__menu__list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.header__menu__link {
+  margin-left: 50px;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 30px;
+}
+
+.footer__menu__link {
+  margin-left: 50px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.sliders-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+@media screen and (max-width: 860px) {
+  .header__menu, .footer {
+    display: none;
+  }
+}
+
+
+/* 여기까지 풋터, 네비바  */
+.titleCon{
+  font-size:20px;
+}
+
+
+
+/* 작성폼 css */
+.form{
+  width:70%;
+}
+.form-control{
+  width:90%;
+  margin-left:90px;
+}
+.form-control-1 {
+  border: none;
+  border-bottom: 1px solid;
+  outline: none;
+}
+.mb-3{
+  margin-top:30px;
+  position:relative;
+}
+.form-label {
+  position:absolute;
+}
+.form-label p {
+   color:black;
+}
+textarea{
+  height:400px;
+  -webkit-line-clamp: 12;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+.btn-primary{
+   font-size:20px;
+   width:10%;
+   height:50px;
+   margin-top:20px;
+   margin-bottom:20px;
+   background: black;
+   color:white;
+   border-radius:10px;
+   border:none;
+   position:absolute;
+   left: 1320px;
+}
+.btn-primary:hover{
+  background: #ff6c00;
+  color: #fff;
+  border:1px solid #a5a773;
+  cursor:pointer;
+}
+#form2{
+  width:50%;
+}
+.photo{
+  border:1px solid black;
+  display:inline-block;
+  height:80px;
+  width:80px;
+  text-align:center;
+  margin-top:30px;
+}
+#rating>label{
+  margin-left:10px;
+  margin-right:50px;
+}
+#rating {
+  display: inline-block;
+}
+
+.rating input {
+  display: none;
+}
+
+.rating label {
+  color: black;
+  float: right;
+}
+
+.product-img-box {
+    display: flex;
+    margin-top: 30px;
+}
+.picture {
+   font-weight: normal;
+   margin-right: 20px;
+}
+
+.button {
+    width: 90%;
+    height: 50px;
+    position: relative;
+}
+.btn-primary{
+   font-size: 20px;
+   width: 100px;
+   height:50px;
+   background: black;
+   color:white;
+   border-radius:10px;
+   border:none;
+   position:absolute;
+   left: 100%;
+}
+.btn-primary:hover{
+  background: red;
+  color: #fff;
+  cursor:pointer;
+}
+
+.box{
+  position:relative;
+}
+.img_b{
+  position:absolute;
+  top:40%;
+}

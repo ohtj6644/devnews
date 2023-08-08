@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DevNews-로그인</title>
+  <link rel="stylesheet" href="/login.css"/>
+</head>
+<body>
+  <header class="header">
+    <a class="header__logo" th:href="@{/}">Dev<span>r</span>News</a>
+    <nav class="header__menu">
+      <ul class="header__menu__list">
+        <li class="header__menu__item"><a class="header__menu__link" th:href="@{/news/list}">Developer News</a></li>
+        <li class="header__menu__item"><a class="header__menu__link" th:href="@{/review/list}">News Review</a></li>
+        <li class="header__menu__item"><a class="header__menu__link" th:href="@{/notice/list}">Notice</a></li>
+        <li class="header__menu__item"><a class="header__menu__link" sec:authorize="isAnonymous()"
+                                          th:href="@{/user/login}">Log-In</a></li>
+        <li class="header__menu__item"><a class="header__menu__link" sec:authorize="isAuthenticated()"
+                                          th:href="@{/user/logout}">Log-Out</a></li>
+        <li class="header__menu__item"><a class="header__menu__link" sec:authorize="isAnonymous()"
+                                          th:href="@{/user/signup}">Sign-Up</a></li>
+        <li class="header__menu__item"><a class="header__menu__link" sec:authorize="isAuthenticated()"
+               th:if="${#authorization.expression('hasRole(''ADMIN'') or hasRole(''SUPER_ADMIN'')')}" th:href="@{/admin/news/create}">NewsCreate</a></li>
+      </ul>
+    </nav>
+  </header>
+</body>
+</html>

@@ -22,7 +22,7 @@ public class News {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Size(max = 50)
+    @Size(max = 100)
     private String subject;
 
     private LocalDateTime createDate;

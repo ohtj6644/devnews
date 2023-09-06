@@ -32,8 +32,13 @@ public class NewsController {
     public String newsDetail(Model model, @PathVariable("id") Integer id){
         News news=this.newsService.getNews(id);
         this.newsService.viewCountUp(news);
-        model.addAttribute("news",news);
+        Page<News> paging = this.newsService.getList(0,"");
+
+
+        model.addAttribute("news1",news);
+        model.addAttribute("paging",paging);
         return "news_detail";
     }
+
 }
 

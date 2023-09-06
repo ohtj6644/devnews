@@ -15,6 +15,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -51,7 +52,7 @@ public class NewsService {
     public Page<News> getList(int page, String kw) {
         List<Sort.Order> sorts= new ArrayList<>();
         sorts.add(Sort.Order.desc("id"));
-        Pageable pageable = PageRequest.of(page,18,Sort.by(sorts));
+        Pageable pageable = PageRequest.of(page,4,Sort.by(sorts));
         Specification<News> spec = search(kw);
         return this.newsRepository.findAll(spec,pageable);
     }

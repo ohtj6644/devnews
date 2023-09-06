@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>DevNews(News List)</title>
   <link rel="stylesheet" href="/newslist.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 </head>
 <body>
 <div class="container">
@@ -13,12 +14,23 @@
   <main class="sliders-container">
     <div class="list-box">
       <div class="sideNews" th:each="firstNews, iterStat : ${paging}" th:if="${iterStat.index == 0}">
-        <div class="title-box">
-          <span class="NewstitleF" th:text="${firstNews.subject}">뉴스제목</span>
-        </div>
-        <img th:src="${firstNews.filepaths[0]}" />
-        <div class="contentbox">
-              <span th:text="${firstNews.content}">.</span>
+        <div id="slider">
+          <a href="#" class="control_next">></a>
+          <a href="#" class="control_prev"><</a>
+          <ul >
+            <li th:each="news, stat : ${paging}" th:if="${stat.index < 4}" class="slideLi">
+              <a th:href="@{|/news/detail/${news.id}|}">
+                  <div class="textConDiv">
+                    <p class="NewstitleF" th:text="${news.subject}">뉴스제목</p>
+                  </div>
+                <img class="slideNewsImg" th:src="${news.filepaths[0]}" />
+                  <div class="textConDiv2">
+                    <span th:text="${news.content}">.</span>
+                  </div>
+              </a>
+            </li>
+
+          </ul>
         </div>
       </div>
       <div class="list">
@@ -48,39 +60,88 @@
       </div>
     </div>
   </main>
-<!-- 페이징처리 시작 -->
-<div th:if="${!paging.isEmpty()}" style="text-align: center;">
-  <ul class="pagination1 justify-content-center">
-    <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
-      <a class="page-link1" th:href="${paging.hasPrevious} ? @{|?page=${paging.number-1}|} : @{|?page=0|}">
-        <span><</span>
-      </a>
-    </li>
-    <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
-        th:if="${page >= paging.number-5 and page <= paging.number+5}"
-        th:classappend="${page == paging.number} ? 'active'"
-        class="page-item">
-      <a th:text="${page+1}" class="page-link1" th:href="@{|?page=${page}|}"></a>
-    </li>
-    <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
-      <a class="page-link1" th:href="@{|?page=${paging.number+1}|}">
-        <span>></span>
-      </a>
-    </li>
-  </ul>
-</div>
-<!-- 페이징처리 끝-->
-<!--  영역  -->
-<footer class="footer">
-  <nav class="footer__menu">
-    <ul class="footer__menu__list">
-      <li class="footer__menu__item"><a class="footer__menu__link" href="https://velog.io/@ohtj6644">velog</a></li>
-      <li class="footer__menu__item"><a class="footer__menu__link" href="https://github.com/ohtj6644">github</a></li>
-      <li class="footer__menu__item"><a class="footer__menu__link">instagram</a></li>
+  <!-- 페이징처리 시작 -->
+  <div th:if="${!paging.isEmpty()}" style="text-align: center;">
+    <ul class="pagination1 justify-content-center">
+      <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
+        <a class="page-link1" th:href="${paging.hasPrevious} ? @{|?page=${paging.number-1}|} : @{|?page=0|}">
+          <span><</span>
+        </a>
+      </li>
+      <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
+          th:if="${page >= paging.number-5 and page <= paging.number+5}"
+          th:classappend="${page == paging.number} ? 'active'"
+          class="page-item">
+        <a th:text="${page+1}" class="page-link1" th:href="@{|?page=${page}|}"></a>
+      </li>
+      <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
+        <a class="page-link1" th:href="@{|?page=${paging.number+1}|}">
+          <span>></span>
+        </a>
+      </li>
     </ul>
-  </nav>
-</footer>
+  </div>
+  <!-- 페이징처리 끝-->
+  <!--  영역  -->
+  <footer class="footer">
+    <nav class="footer__menu">
+      <ul class="footer__menu__list">
+        <li class="footer__menu__item"><a class="footer__menu__link" href="https://velog.io/@ohtj6644">velog</a></li>
+        <li class="footer__menu__item"><a class="footer__menu__link" href="https://github.com/ohtj6644">github</a></li>
+        <li class="footer__menu__item"><a class="footer__menu__link">instagram</a></li>
+      </ul>
+    </nav>
+  </footer>
 </div>
 
+<script>
+jQuery(document).ready(function ($) {
+
+  $('#checkbox').change(function(){
+    setInterval(function () {
+        moveRight();
+    }, 3000);
+  });
+
+	var slideCount = $('#slider ul li').length;
+	var slideWidth = $('#slider ul li').width();
+	var slideHeight = $('#slider ul li').height();
+	var sliderUlWidth = slideCount * slideWidth;
+
+	$('#slider').css({ width: slideWidth, height: slideHeight });
+
+	$('#slider ul').css({ width: sliderUlWidth, marginLeft: - slideWidth });
+
+    $('#slider ul li:last-child').prependTo('#slider ul');
+
+    function moveLeft() {
+        $('#slider ul').animate({
+            left: + slideWidth
+        }, 200, function () {
+            $('#slider ul li:last-child').prependTo('#slider ul');
+            $('#slider ul').css('left', '');
+        });
+    };
+
+    function moveRight() {
+        $('#slider ul').animate({
+            left: - slideWidth
+        }, 200, function () {
+            $('#slider ul li:first-child').appendTo('#slider ul');
+            $('#slider ul').css('left', '');
+        });
+    };
+
+    $('a.control_prev').click(function () {
+        moveLeft();
+    });
+
+    $('a.control_next').click(function () {
+        moveRight();
+    });
+
+});
+
+</script>
 </body>
 </html>

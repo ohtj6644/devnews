@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DevNews(뉴스작성)</title>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-zoom/1.7.21/jquery.zoom.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+  <link rel="stylesheet" href="https://w3learnpoint.com/cdn/jquery-picZoomer.css">
+  <link rel="stylesheet" href="/newsdetail.css"/>
+</head>
+<body>
+<div class="full_body">
+  <div class="container">
+    <header th:replace="layout/navbar.html"></header>
+    <!-- Container for all sliders, and pagination -->
+    <span class="titleCon">Developer News Detail</span>
+    <main class="sliders-container">
+      <!--   디테일시작   -->
+      <section id="services" class="services section-bg">
+        <div class="container-fluid">
+          <div class="row row-sm">
+            <div class="col-md-6 _boxzoom">
+              <div class="zoom-thumb">
+                <ul class="piclist">
+                  <li th:if="${#lists.size(news1.filepaths) > 0}"><img th:src="${news1.filepaths[0]}" alt=""></li>
+                  <li th:if="${#lists.size(news1.filepaths) > 1}"><img th:src="${news1.filepaths[1]}" alt=""></li>
+                  <li th:if="${#lists.size(news1.filepaths) > 2}"><img th:src="${news1.filepaths[2]}" alt=""></li>
+                  <li th:if="${#lists.size(news1.filepaths) > 3}"><img th:src="${news1.filepaths[3]}" alt=""></li>
+                </ul>
+              </div>
+              <div class="_product-images">
+                <div class="picZoomer">
+                  <img class="my_img" th:src="${news1.filepaths[0]}" style="width:450px ; height:450px;">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6" id="detail_news">
+              <div class="_p-features">
+                <span id="news_sub" th:text="${news1.subject}"> 뉴스제목 </span ><br><p class="scrollCon" th:text="${news1.content}">
+                뉴스내용 
+              </p>
+              </div>
+              <a th:href="@{|/review/create/${news1.id}|}">
+              <button class="btn-theme btn buy-btn" tabindex="0" >
+                <i class="fa fa-sticky-note"></i> Review
+              </button>
+              </a>
+            </div>
+          </div>
+        </div>
+  </div>
+</div>
+</section>
+<section >
+  <div class="container">
+    <div class="row">
+      <div class="col-s" style="margin:20px;">
+        <h3 class="title"> News List  </h3>
+      </div>
+    </div>
+    <div class="ro98">
+      <div class="col-m">
+        <ul class="ulList" id="recent_post">
+          <li class="item" th:each="news, stat : ${paging}" th:if="${stat.index < 4}" >
+              <div class="pdis_img" style="display:inline-block">
+                <a th:href="@{|/news/detail/${news.id}|}">
+                  <img th:src="${news.filepaths[0]}">
+                </a>
+              </div>
+            <a th:href="@{|/news/detail/${news.id}|}">
+              <h4 class="mb-1" th:text="${news.subject}">  Milton Bottle </h4>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</section>
+</div>
+<!--   디테일 끝   -->
+</main>
+<!--  영역  -->
+
+</div>
+</div>
+<script>
+
+//돋보기 제어
+;(function($){
+	$.fn.picZoomer = function(options){
+		var opts = $.extend({}, $.fn.picZoomer.defaults, options),
+			$this = this,
+			$picBD = $('<div class="picZoomer-pic-wp"></div>').css({'width':opts.picWidth+'px', 'height':opts.picHeight+'px'}).appendTo($this),
+			$pic = $this.children('img').addClass('picZoomer-pic').appendTo($picBD),
+			$cursor = $('<div class="picZoomer-cursor"><i class="f-is picZoomCursor-ico"></i></div>').appendTo($picBD),
+			cursorSizeHalf = {w:$cursor.width()/2 ,h:$cursor.height()/2},
+			$zoomWP = $('<div class="picZoomer-zoom-wp"><img src="" alt="" class="picZoomer-zoom-pic"></div>').appendTo($this),
+			$zoomPic = $zoomWP.find('.picZoomer-zoom-pic'),
+			picBDOffset = {x:$picBD.offset().left,y:$picBD.offset().top};
+
+
+		opts.zoomWidth = opts.zoomWidth||opts.picWidth;
+		opts.zoomHeight = opts.zoomHeight||opts.picHeight;
+		var zoomWPSizeHalf = {w:opts.zoomWidth/2 ,h:opts.zoomHeight/2};
+
+
+		$zoomPic.css({'width':opts.picWidth*opts.scale+'px', 'height':opts.picHeight*opts.scale+'px'});
+
+		//초기화 이벤트
+		$picBD.on('mouseenter',function(event){
+			$zoomPic.attr('src',$pic.attr('src'))
+		}).on('mouseleave',function(event){
+			$cursor.hide();
+			$zoomWP.hide();
+		}).on('mousemove', function(event){
+			var x = event.pageX-picBDOffset.x,
+				y = event.pageY-picBDOffset.y;
+
+			$cursor.css({'left':x-cursorSizeHalf.w+'px', 'top':y-cursorSizeHalf.h+'px'});
+			$zoomPic.css({'left':-(x*opts.scale-zoomWPSizeHalf.w)+'px', 'top':-(y*opts.scale-zoomWPSizeHalf.h)+'px'});
+
+		});
+		return $this;
+
+	};
+	$.fn.picZoomer.defaults = {
+        picHeight: 450,
+		scale: 2.5,
+		zoomerPosition: {top: '0', left: '380px'},
+
+		zoomWidth: 460,
+		zoomHeight: 460
+	};
+})(jQuery);
+
+
+
+$(document).ready(function () {
+     $('.picZoomer').picZoomer();
+    $('.piclist li').on('click', function (event) {
+        var $pic = $(this).find('img');
+        $('.picZoomer-pic').attr('src', $pic.attr('src'));
+    });
+
+  });
+
+
+
+</script>
+</body>
+</html>

@@ -116,6 +116,7 @@ display:inline-block;
   width:40%;
   position:absolute;
   top:0;
+  left:5%;
   text-align:center;
   overflow:hidden;
 }
@@ -418,6 +419,7 @@ top:10%;
 .slideLi{
 position:relative;
 text-align:center;
+overflow-y: scroll;
 }
 .slideLi>a>img{
 position:absolute;
@@ -434,4 +436,44 @@ top:90%;
 height:19%;
 overflow-y: hidden;
     text-overflow-y: ellipsis;
+}
+
+.mb-3>input{
+  width:415px;
+  margin-left:0;
+  position:absolute;
+  right:200px;
+  padding:0;
+  margin-left:1px;
+}
+
+.mb-3>textarea{
+  padding:0;
+  position:absolute;
+  right:200px;
+  margin-top:50px;
+
+}
+.form-label{
+  position:absolute;
+  right:650px;
+}
+#form_label{
+  top:50px;
+
+}
+.button>input{
+  position:absolute;
+  top:70%;
+  right:200px;
+  text-decoration:none;
+  border:none;
+  background: none;
+  color:white;
+  font-size:20px;
+}
+
+.button>input:hover{
+  color:gray;
+  cursor:pointer;
 }

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DevNews(News List)</title>
+  <link rel="stylesheet" href="/review_list.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+</head>
+<body>
+<div class="container">
+  <header th:replace="layout/navbar.html"></header>
+  <!-- Container for all sliders, and pagination -->
+  <span class="titleCon">News Review</span>
+  <main class="sliders-container">
+    <div class="list-box">
+      <div class="list">
+        <!--     리스트시작     -->
+        <div class="review_board_page_1">
+          <ul id="articleItem">
+            <li th:each="reviews, stat : ${paging}" th:if="${stat.index < 12}">
+              <nav class="item review_board_img">
+                <div th:if="${reviews.article != null and not #lists.isEmpty(reviews.article.filepaths)}" class="articlecon">
+                  <a th:href="@{|/review/detail/${reviews.id}|}">
+                    <img th:src="${reviews.article.filepaths[0]}" class="review_board_main_img"/>
+                  </a>
+                </div>
+                <div class="text_box_name text_box_name_1">
+                  <span>Original Sub :</span>
+                    <span class="tal222" th:text="${reviews.article != null ? reviews.article.subject : ''}">s</span>
+                </div>
+                <div class="review_board_text_box_tag">
+                  <span>Review Sub :</span>
+                  <span class="tal222" th:text="${reviews.subject}"></span>
+                </div>
+              </nav>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+  <!-- 페이징처리 시작 -->
+  <div th:if="${!paging.isEmpty()}" style="text-align: center;">
+    <ul class="pagination1 justify-content-center">
+      <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
+        <a class="page-link1" th:href="${paging.hasPrevious} ? @{|?page=${paging.number-1}|} : @{|?page=0|}">
+          <span><</span>
+        </a>
+      </li>
+      <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
+          th:if="${page >= paging.number-5 and page <= paging.number+5}"
+          th:classappend="${page == paging.number} ? 'active'"
+          class="page-item">
+        <a th:text="${page+1}" class="page-link1" th:href="@{|?page=${page}|}"></a>
+      </li>
+      <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
+        <a class="page-link1" th:href="@{|?page=${paging.number+1}|}">
+          <span>></span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <!-- 페이징처리 끝-->
+  <!--  영역  -->
+  <footer class="footer">
+    <nav class="footer__menu">
+      <ul class="footer__menu__list">
+        <li class="footer__menu__item"><a class="footer__menu__link" href="https://velog.io/@ohtj6644">velog</a></li>
+        <li class="footer__menu__item"><a class="footer__menu__link" href="https://github.com/ohtj6644">github</a></li>
+        <li class="footer__menu__item"><a class="footer__menu__link">instagram</a></li>
+      </ul>
+    </nav>
+  </footer>
+</div>
+
+</body>
+</html>

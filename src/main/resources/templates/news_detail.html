@@ -82,6 +82,57 @@
   </div>
 
 </section>
+
+<section >
+  <div class="container">
+    <div class="row">
+    <div class="col-s" style="margin:20px;">
+      <h3 class="title"> Review List  </h3>
+    </div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:200px;">Subject</th>
+          <th style="width:400px;">Content</th>
+          <th style="width:100px;">Author</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="reviews, stat : ${reviewPaging}" th:if="${stat.index < 10}">
+          <td> <a th:href="@{|/review/detail/${reviews.id}|}"> <span th:text="${reviews.subject}"></span></a></td>
+          <td><a th:href="@{|/review/detail/${reviews.id}|}"> <span th:text="${reviews.content}"></span></a></td>
+          <td><span th:text="${reviews.author.nickname}"></span></td>
+        </tr>
+      </tbody>
+    </table>
+
+  <!-- 페이징처리 시작 -->
+  <div th:if="${!reviewPaging.isEmpty()}" style="text-align: center;">
+    <ul class="pagination1 justify-content-center">
+      <li class="page-item" th:classappend="${!reviewPaging.hasPrevious} ? 'disabled'">
+        <a class="page-link1" th:href="${reviewPaging.hasPrevious} ? @{|?page=${reviewPaging.number-1}|} : @{|?page=0|}">
+          <span><</span>
+        </a>
+      </li>
+      <li th:each="page: ${#numbers.sequence(0, reviewPaging.totalPages-1)}"
+          th:if="${page >= reviewPaging.number-5 and page <= reviewPaging.number+5}"
+          th:classappend="${page == reviewPaging.number} ? 'active'"
+          class="page-item">
+        <a th:text="${page+1}" class="page-link1" th:href="@{|?page=${page}|}"></a>
+      </li>
+      <li class="page-item" th:classappend="${!reviewPaging.hasNext} ? 'disabled'">
+        <a class="page-link1" th:href="@{|?page=${reviewPaging.number+1}|}">
+          <span>></span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- 페이징처리 끝-->
+  </div>
+</section>
+
 </div>
 <!--   디테일 끝   -->
 </main>

@@ -22,8 +22,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -103,4 +104,13 @@ public class NewsService {
         }
     }
 
+    public List<News> getAList() {
+        List<News> latestNews =new ArrayList<>();
+        latestNews.add(this.newsRepository.findById(1));
+        latestNews.add(this.newsRepository.findById(2));
+        latestNews.add(this.newsRepository.findById(3));
+        latestNews.add(this.newsRepository.findById(4));
+
+        return latestNews;
+    }
 }

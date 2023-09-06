@@ -579,3 +579,98 @@ text-overflow: ellipsis;
   grid-template-columns: repeat(4, minmax(150px, 300px));
   gap: 10px; /* 간격 설정 */
 }
+
+
+
+/*paging*/
+.content {
+  /*review_content*/
+  margin-bottom: 20px;
+}
+.pagination {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.pagination a {
+  display: inline-block;
+  padding: 5px 10px;
+  margin: 0 5px;
+  background-color: #f1f1f1;
+  text-decoration: none;
+  color: #333;
+  border-radius: 3px;
+}
+.pagination .active {
+  color: #fff;
+}
+.pagination-1{
+  flex-direction: column;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.page-list {
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.page-item {
+  margin-right: 5px;
+}
+
+.page-link {
+  display: inline-block;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  text-decoration: none;
+  color: #333;
+}
+
+.page-link.active {
+  color: #fff;
+}
+
+
+
+.page-link1{
+  background-color: #2a2a2a;
+  color:#999;
+  font-size:20px;
+  padding-right:10px;
+  padding-left:10px;
+  margin-right:5px;
+  margin:left:5px;
+}
+
+.page-link1:hover{
+opacity: 1;
+  -webkit-transition: all 0.2s ease;
+background-color: white;
+color:rgb(30, 30, 30);
+}
+.pagination1{
+margin:0;}
+
+.page-item{
+ Display:inline-block;
+}
+
+
+th{
+border:1px solid white;
+border-radius:5px;
+}
+
+td{
+border:1px solid white;
+border-radius:5px;
+overflow:hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+}

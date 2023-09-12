@@ -691,7 +691,6 @@ border-bottom:1px solid white;
 }
 
 .item2{
-  border:1px solid red;
   position:absolute;
   right:10%;
   width:50%;
@@ -702,4 +701,148 @@ border-bottom:1px solid white;
 
 #news_sub{
   font-weight:bold;
+}
+
+.mb-1{
+white-space: nowrap;
+  width: 230px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mb-1:hover{
+color:gray;
+}
+
+.CommentBtn{
+
+  width:150px;
+  background: #000;
+}
+
+.btn:hover{
+  color:black;
+}
+
+
+
+
+
+/* 댓글*/
+
+.question-create-box{
+text-align:center;
+border-bottom:2px solid white;
+position:relative;
+height:50px;
+margin-top:50px;
+}
+.question-create-box > span{
+font-family: NeoDunggeunmoPro-Regular;
+text-shadow: 2px 2px 4px black;
+}
+
+.question-create-btn{
+    color:white;
+    border:none;
+    background:none;
+    position:absolute;
+    right:0;
+}
+.question-create-btn:hover{
+color: gray;
+}
+
+.question-list-section{
+  width: 100%;
+}
+
+.question-list-content {
+  flex-wrap: wrap;
+  display: flex;
+}
+
+.question-container {
+  width: 100%;
+  margin: 10px;
+}
+
+.question-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  padding: 10px;
+  border-bottom:0.3px solid white;
+}
+
+.question-state,
+.question-author,
+.question-create-date {
+  text-align: center;
+  width: 15%;
+}
+.question-subject {
+  width: 55%;
+  cursor: pointer;
+}
+
+.question-subject:hover{
+color:gray;
+}
+
+.question-content {
+  display: none;
+  margin: 0 auto;
+}
+
+.question-list-foot {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.question-list-foot ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+}
+
+.question-list-foot li {
+  padding: 10px;
+}
+
+.question-list-foot a {
+  display: block;
+  padding: 5px 10px;
+  text-decoration: none;
+}
+
+.question-list-foot .active {
+  font-weight: bold;
+}
+
+.question-modify, .question-delete{
+  color:white;
+      border:none;
+      background:none;
+
+  font-size: 20px;
+}
+.question-modify:hover{
+color:gray;
+}
+
+.question-delete:hover{
+color:gray;
+}
+
+.comment_sub{
+position:absolute;
+left:0;
+}
+
+
+.ro98{
+margin-bottom:100px;
 }

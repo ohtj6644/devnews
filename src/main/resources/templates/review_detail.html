@@ -35,17 +35,17 @@
                   <li class="item" >
                     <h4>Original</h4>
                     <div class="pdis_img" style="display:inline-block">
-                      <a th:href="@{|/news/detail/${news.id}|}">
-                        <img th:src="${news.filepaths[0]}">
+                      <a th:href="@{|/news/detail/${review.article.id}|}">
+                        <img th:src="${review.article.filepaths[0]}">
                       </a>
                     </div>
-                    <a th:href="@{|/news/detail/${news.id}|}">
-                      <h4 class="mb-1" th:text="${news.subject}">  Milton Bottle </h4>
+                    <a th:href="@{|/news/detail/${review.article.id}|}">
+                      <h4 class="mb-1" th:text="${review.article.subject}">  Milton Bottle </h4>
                     </a>
                   </li>
                   <li class="item2">
                     <div>
-                      <span id="news_sub" th:text="${news1.subject}"> 리뷰제목 </span ><br><p class="scrollCon" th:text="${news1.content}">
+                      <span id="news_sub" th:text="${review.subject}"> 리뷰제목 </span ><br><p class="scrollCon" th:text="${review.content}">
                       리뷰내용
                     </p>
                     </div>
@@ -64,44 +64,31 @@
                 <h3 class="title"> Comment  </h3>
               </div>
             </div>
-            <table>
-              <thead>
-              <tr>
-                <th style="width:85%; padding-left:10px;">Content</th>
-                <th style="width:15%;">Author</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr th:each="reviews, stat : ${reviewPaging}" th:if="${stat.index < 10}">
-                <td> <a th:href="@{|/review/detail/${reviews.id}|}"> <span th:text="${reviews.subject}"></span></a></td>
-                <td><span th:text="${reviews.author.nickname}"></span></td>
-              </tr>
-              </tbody>
-            </table>
+            <div id="question"></div>
 
-            <!-- 페이징처리 시작 -->
-            <div th:if="${!reviewPaging.isEmpty()}" style="text-align: center;">
-              <ul class="pagination1 justify-content-center">
-                <li class="page-item" th:classappend="${!reviewPaging.hasPrevious} ? 'disabled'">
-                  <a class="page-link1" th:href="${reviewPaging.hasPrevious} ? @{|?page=${reviewPaging.number-1}|} : @{|?page=0|}">
-                    <span><</span>
-                  </a>
-                </li>
-                <li th:each="page: ${#numbers.sequence(0, reviewPaging.totalPages-1)}"
-                    th:if="${page >= reviewPaging.number-5 and page <= reviewPaging.number+5}"
-                    th:classappend="${page == reviewPaging.number} ? 'active'"
-                    class="page-item">
-                  <a th:text="${page+1}" class="page-link1" th:href="@{|?page=${page}|}"></a>
-                </li>
-                <li class="page-item" th:classappend="${!reviewPaging.hasNext} ? 'disabled'">
-                  <a class="page-link1" th:href="@{|?page=${reviewPaging.number+1}|}">
-                    <span>></span>
-                  </a>
-                </li>
-              </ul>
-            </div>
+            <!--            &lt;!&ndash; 페이징처리 시작 &ndash;&gt;-->
+            <!--            <div th:if="${!reviewPaging.isEmpty()}" style="text-align: center;">-->
+            <!--              <ul class="pagination1 justify-content-center">-->
+            <!--                <li class="page-item" th:classappend="${!reviewPaging.hasPrevious} ? 'disabled'">-->
+            <!--                  <a class="page-link1" th:href="${reviewPaging.hasPrevious} ? @{|?page=${reviewPaging.number-1}|} : @{|?page=0|}">-->
+            <!--                    <span><</span>-->
+            <!--                  </a>-->
+            <!--                </li>-->
+            <!--                <li th:each="page: ${#numbers.sequence(0, reviewPaging.totalPages-1)}"-->
+            <!--                    th:if="${page >= reviewPaging.number-5 and page <= reviewPaging.number+5}"-->
+            <!--                    th:classappend="${page == reviewPaging.number} ? 'active'"-->
+            <!--                    class="page-item">-->
+            <!--                  <a th:text="${page+1}" class="page-link1" th:href="@{|?page=${page}|}"></a>-->
+            <!--                </li>-->
+            <!--                <li class="page-item" th:classappend="${!reviewPaging.hasNext} ? 'disabled'">-->
+            <!--                  <a class="page-link1" th:href="@{|?page=${reviewPaging.number+1}|}">-->
+            <!--                    <span>></span>-->
+            <!--                  </a>-->
+            <!--                </li>-->
+            <!--              </ul>-->
+            <!--            </div>-->
 
-            <!-- 페이징처리 끝-->
+            <!--            &lt;!&ndash; 페이징처리 끝&ndash;&gt;-->
           </div>
         </section>
 
@@ -112,6 +99,13 @@
 
 </div>
 </div>
+<script>
 
+var reviewId = [[${review.Id}]];
+var questionUrl = "/answer/list/" + reviewId;
+    $.get(questionUrl, function(data) {
+        $("#question").html(data);
+    });
+</script>
 </body>
 </html>

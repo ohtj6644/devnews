@@ -1,7 +1,9 @@
 package com.ll.DevNews.review;
 
+import com.ll.DevNews.DataNotFoundException;
 import com.ll.DevNews.news.News;
 import com.ll.DevNews.newsAnswer.NewsAnswer;
+import com.ll.DevNews.reviewAnswer.ReviewAnswer;
 import com.ll.DevNews.user.SiteUser;
 import jakarta.persistence.criteria.*;
 import jakarta.validation.constraints.NotEmpty;
@@ -35,8 +37,12 @@ public class ReviewService {
     }
 
     public Review getReview(int id) {
-        Optional<Review> review = this.reviewRepository.findById(id);
-        return review.get();
+        Optional<Review> product = this.reviewRepository.findById(id);
+        if (product.isPresent()) {
+            return product.get();
+        } else {
+            throw new DataNotFoundException("product not found");
+        }
     }
 
     private Specification<Review> search(String kw) {
@@ -68,4 +74,6 @@ public class ReviewService {
         Pageable pageable = PageRequest.of(page,10,Sort.by(sorts));
         return this.reviewRepository.findByArticle(news , pageable);
     }
+
+
 }

@@ -41,10 +41,8 @@
 .ms--images .ms-slide:nth-child(2) .ms-slide__image {
   background-image: url("https://i.postimg.cc/8P3dwCKm/benefits-of-group-therapy-722x406.jpg");
 }
+
 .ms--images .ms-slide:nth-child(3) .ms-slide__image {
-  background-image: url("https://i.postimg.cc/8PqWM0cy/Notice.jpg");
-}
-.ms--images .ms-slide:nth-child(4) .ms-slide__image {
   background-image: url("https://cdn.jsdelivr.net/gh/lmgonzalves/momentum-slider@3b3037f7f1bab402fe3c75cd20ab18e04e1cbe0b/portfolio-carousel/img/jurica-koletic-321003-unsplash.jpg");
 }
 .ms--images .ms-slide__image-container {

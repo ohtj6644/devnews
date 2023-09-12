@@ -12,7 +12,6 @@
       <ul class="header__menu__list">
         <li class="header__menu__item"><a class="header__menu__link" th:href="@{/news/list}">Developer News</a></li>
         <li class="header__menu__item"><a class="header__menu__link" th:href="@{/review/list}">News Review</a></li>
-        <li class="header__menu__item"><a class="header__menu__link" th:href="@{/notice/list}">Notice</a></li>
         <li class="header__menu__item"><a class="header__menu__link" sec:authorize="isAnonymous()"
                                           th:href="@{/user/login}">Log-In</a></li>
         <li class="header__menu__item"><a class="header__menu__link" sec:authorize="isAuthenticated()"

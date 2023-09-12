@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DevNews(뉴스작성)</title>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-zoom/1.7.21/jquery.zoom.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+  <link rel="stylesheet" href="https://w3learnpoint.com/cdn/jquery-picZoomer.css">
+  <link rel="stylesheet" href="/reviewdetail.css"/>
+</head>
+<body>
+<div class="full_body">
+  <div class="container">
+    <header th:replace="layout/navbar.html"></header>
+    <!-- Container for all sliders, and pagination -->
+    <span class="titleCon">Developer News Review</span>
+    <main class="sliders-container">
+      <!--   디테일시작   -->
+      <section id="services" class="services section-bg">
+        <section>
+          <div class="container">
+            <div class="row">
+              <div class="col-s" style="margin:20px;">
+                <h3 class="title"> News Review  </h3>
+              </div>
+            </div>
+            <div class="ro98">
+              <div class="col-m">
+                <ul class="ulList" id="recent_post">
+                  <li class="item" >
+                    <h4>Original</h4>
+                    <div class="pdis_img" style="display:inline-block">
+                      <a th:href="@{|/news/detail/${news.id}|}">
+                        <img th:src="${news.filepaths[0]}">
+                      </a>
+                    </div>
+                    <a th:href="@{|/news/detail/${news.id}|}">
+                      <h4 class="mb-1" th:text="${news.subject}">  Milton Bottle </h4>
+                    </a>
+                  </li>
+                  <li class="item2">
+                    <div>
+                      <span id="news_sub" th:text="${news1.subject}"> 리뷰제목 </span ><br><p class="scrollCon" th:text="${news1.content}">
+                      리뷰내용
+                    </p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+        <section >
+          <div class="container">
+            <div class="row">
+              <div class="col-s" style="margin:20px;">
+                <h3 class="title"> Comment  </h3>
+              </div>
+            </div>
+            <table>
+              <thead>
+              <tr>
+                <th style="width:85%; padding-left:10px;">Content</th>
+                <th style="width:15%;">Author</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr th:each="reviews, stat : ${reviewPaging}" th:if="${stat.index < 10}">
+                <td> <a th:href="@{|/review/detail/${reviews.id}|}"> <span th:text="${reviews.subject}"></span></a></td>
+                <td><span th:text="${reviews.author.nickname}"></span></td>
+              </tr>
+              </tbody>
+            </table>
+
+            <!-- 페이징처리 시작 -->
+            <div th:if="${!reviewPaging.isEmpty()}" style="text-align: center;">
+              <ul class="pagination1 justify-content-center">
+                <li class="page-item" th:classappend="${!reviewPaging.hasPrevious} ? 'disabled'">
+                  <a class="page-link1" th:href="${reviewPaging.hasPrevious} ? @{|?page=${reviewPaging.number-1}|} : @{|?page=0|}">
+                    <span><</span>
+                  </a>
+                </li>
+                <li th:each="page: ${#numbers.sequence(0, reviewPaging.totalPages-1)}"
+                    th:if="${page >= reviewPaging.number-5 and page <= reviewPaging.number+5}"
+                    th:classappend="${page == reviewPaging.number} ? 'active'"
+                    class="page-item">
+                  <a th:text="${page+1}" class="page-link1" th:href="@{|?page=${page}|}"></a>
+                </li>
+                <li class="page-item" th:classappend="${!reviewPaging.hasNext} ? 'disabled'">
+                  <a class="page-link1" th:href="@{|?page=${reviewPaging.number+1}|}">
+                    <span>></span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <!-- 페이징처리 끝-->
+          </div>
+        </section>
+
+  </div>
+  <!--   디테일 끝   -->
+  </main>
+  <!--  영역  -->
+
+</div>
+</div>
+
+</body>
+</html>

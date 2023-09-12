@@ -93,15 +93,13 @@
     <table>
       <thead>
         <tr>
-          <th style="width:200px;">Subject</th>
-          <th style="width:400px;">Content</th>
-          <th style="width:100px;">Author</th>
+          <th style="width:85%;">Subject</th>
+          <th style="width:15%;">Author</th>
         </tr>
       </thead>
       <tbody>
         <tr th:each="reviews, stat : ${reviewPaging}" th:if="${stat.index < 10}">
           <td> <a th:href="@{|/review/detail/${reviews.id}|}"> <span th:text="${reviews.subject}"></span></a></td>
-          <td><a th:href="@{|/review/detail/${reviews.id}|}"> <span th:text="${reviews.content}"></span></a></td>
           <td><span th:text="${reviews.author.nickname}"></span></td>
         </tr>
       </tbody>

@@ -1,7 +1,6 @@
 package com.ll.DevNews.news;
 
 
-import com.ll.DevNews.newsAnswer.NewsAnswer;
 import com.ll.DevNews.review.Review;
 import com.ll.DevNews.user.SiteUser;
 import jakarta.persistence.*;
@@ -32,8 +31,7 @@ public class News {
 
     private int viewCount;
 
-    @OneToMany(mappedBy = "article", cascade = CascadeType.REMOVE)
-    private List<NewsAnswer> answerList;
+
 
     @OneToMany(mappedBy = "article", cascade = CascadeType.REMOVE)
     private List<Review> reviewList;

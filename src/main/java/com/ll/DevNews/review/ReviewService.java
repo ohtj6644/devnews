@@ -2,7 +2,7 @@ package com.ll.DevNews.review;
 
 import com.ll.DevNews.DataNotFoundException;
 import com.ll.DevNews.news.News;
-import com.ll.DevNews.newsAnswer.NewsAnswer;
+
 import com.ll.DevNews.reviewAnswer.ReviewAnswer;
 import com.ll.DevNews.user.SiteUser;
 import jakarta.persistence.criteria.*;
@@ -53,11 +53,9 @@ public class ReviewService {
             public Predicate toPredicate(Root<Review> q, CriteriaQuery<?> query, CriteriaBuilder cb) {
                 query.distinct(true);  // 중복을 제거
                 Join<Review, SiteUser> u1 = q.join("author", JoinType.LEFT);
-                Join<Review, NewsAnswer> a = q.join("answerList", JoinType.LEFT);
                 return cb.or(cb.like(q.get("subject"), "%" + kw + "%"), // 제목
                         cb.like(q.get("content"), "%" + kw + "%"),      // 내용
-                        cb.like(u1.get("username"), "%" + kw + "%"),    // 질문 작성자
-                        cb.like(a.get("content"), "%" + kw + "%"));   // 답변 작성자
+                        cb.like(u1.get("username"), "%" + kw + "%")); // 답변 작성자
             }
         };
     }
